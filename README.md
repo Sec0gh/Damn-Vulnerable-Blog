@@ -6,7 +6,7 @@ It provides common blogging features such as user registration, login, posting, 
 
 DVB is intentionally vulnerable to give you a hands-on learning experience in security testing. You can safely experiment with its flaws and study the source code to understand how vulnerabilities arise.
 
-⚠️ **Disclaimer:**
+### ⚠️ **Disclaimer:**
 - This project is for **educational and testing purposes only**.
 -  I don't take any responsibility for misuse.
 - Do **NOT** deploy it to production or expose it to the public internet.
