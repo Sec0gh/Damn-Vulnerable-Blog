@@ -4,6 +4,8 @@ Damn Vulnerable Blog (DVB) is a Flask-based blog web application intentionally d
 
 It provides common blogging features such as user registration, login, posting, commenting, changing passwords, and file uploads, but all implemented in insecure ways on purpose.
 
+DVB is intentionally vulnerable to give you a hands-on learning experience in security testing. You can safely experiment with its flaws and study the source code to understand how vulnerabilities arise.
+
 ⚠️ **Disclaimer:**
 - This project is for **educational and testing purposes only**.
 -  I don't take any responsibility for misuse.
@@ -12,9 +14,9 @@ It provides common blogging features such as user registration, login, posting, 
 
 ---
 
-## Vulnerabilities
+## Security Flaws
 
-This application is intentionally designed with multiple vulnerabilities for educational and testing purposes:
+This application includes these security flaws to explore and understand common web security issues:
 - **SQL Injection (SQLi):**
 	- Union-based SQL Injection
 	- Authentication Bypass via SQL Injection
