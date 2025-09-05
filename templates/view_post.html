@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card post">
+    <h2>{{ post[1] }}</h2>
+    <p style="margin: 1rem 0;">{{ post[2] }}</p>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        {% if post[-1] %}
+            <img src="{{ url_for('misc.get_image') }}?image={{ post[-1] }}" alt="Profile" class="icon" width="32" height="32" style="border-radius: 50%; object-fit: cover;">
+        {% else %}
+            <img src="{{ url_for('misc.get_image') }}?image=default-profile.png" alt="Profile" class="icon" width="32" height="32" style="border-radius: 50%; object-fit: cover;">
+        {% endif %}
+        <small>Posted by: {{ post[-2] }}</small>
+    </div>
+</div>
+
+<div class="card">
+    <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Comments</h3>
+
+    {% if comments %}
+        <ul style="list-style: none; padding: 0;">
+            {% for comment in comments %}
+                <li class="card" style="margin-bottom: 1rem; padding: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.5rem;">
+                        {% if comment[2] %}
+                            <img src="{{ url_for('misc.get_image') }}?image={{ comment[2] }}" alt="Profile" class="icon" width="28" height="28" style="border-radius: 50%; object-fit: cover;">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='default-avatar.png') }}" alt="Default" class="icon" width="28" height="28" style="border-radius: 50%; object-fit: cover;">
+                        {% endif %}
+                        <small>By: {{ comment[1] }}</small>
+                    </div>
+                    <p>{{ comment[0] | safe }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="alert alert-info">No comments yet. Be the first!</div>
+    {% endif %}
+</div>
+
+<div class="card">
+    <h4 style="margin-bottom: 1rem;">Add a Comment</h4>
+    <form action="{{ url_for('post.add_comment_route', post_id=post[0]) }}" method="POST">
+        <textarea name="comment_text" placeholder="Write a comment..." required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

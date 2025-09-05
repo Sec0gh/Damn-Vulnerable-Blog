@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h1 class="welcome-message">Welcome, {{ user[1] }}!</h1>
+</div>
+
+<div class="search-container card">
+    <form method="GET" action="{{ url_for('post.search') }}" class="search-form">
+        <input type="text" name="q" placeholder="Search posts...">
+        <button type="submit"><i class="fas fa-search"></i> Search</button>
+    </form>
+</div>
+
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h2 style="color: var(--primary-color); margin: 0;">Recent Posts</h2>
+        <a href="{{ url_for('post.create_post') }}" class="btn">+ Create New Post</a>
+    </div>
+
+    {% if posts %}
+        <ul style="list-style: none; padding: 0; margin: 0;">
+            {% for post in posts %}
+                <li class="post" style="margin-bottom: 1.5rem;">
+                    <a href="{{ url_for('post.view_post', post_id=post[0]) }}" style="text-decoration: none;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            {% if post[-1] %}
+                                <img src="{{ url_for('misc.get_image') }}?image={{ post[-1] }}" alt="Profile" class="icon" width="32" height="32" style="border-radius: 50%; object-fit: cover;">
+                            {% else %}
+                                <img src="{{ url_for('misc.get_image') }}?image=default-profile.png" alt="Profile" class="icon" width="32" height="32" style="border-radius: 50%; object-fit: cover;">
+                            {% endif %}
+                            <strong style="color: var(--gray-color);">{{ post[-2] }}</strong>
+                        </div>
+                        <h3>{{ post[1] }}</h3>
+                        <p style="color: var(--gray-color);">{{ post[2][:120] }}{% if post[2]|length > 120 %}...{% endif %}</p>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="alert alert-info">No posts found.</div>
+    {% endif %}
+</div>
+
+{% endblock %}

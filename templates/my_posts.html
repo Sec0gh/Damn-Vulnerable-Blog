@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">
+        Posts for {{ username }}
+    </h2>
+    <div class="card" style="margin-top: 1rem;">
+        <p><strong>Total posts: </strong> {{ count_result }}</p>
+    </div>
+
+    {% if posts %}
+        <div class="posts-grid" style=" display: grid;grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));gap: 1rem;">
+            {% for post in posts %}
+            <a href="{{ post.preview_url }}"  style="text-decoration: none; color: inherit;"> 
+                <div class="card" style="padding: 1rem; background-color: #fdfdfd;box-shadow: 0 4px 8px rgba(0,0,0,0.1); word-wrap: break-word;min-height: 200px;display: flex;flex-direction: column;">
+                    <h3 style="font-weight: 500; color: var(--primary-color); margin-bottom: 0.5rem;">{{ post.title }}</h3>
+                    <p style="color: var(--gray-color); white-space: pre-wrap;">{{ post.content }}</p>
+                </div>
+            </a>
+
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">No posts found for this user.</div>
+    {% endif %}
+</div>
+{% endblock %}

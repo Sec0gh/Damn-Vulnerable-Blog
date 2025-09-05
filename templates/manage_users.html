@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Manage Users</h2>
+
+    {% if users %}
+        <table style="width:100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">ID</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Username</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Email</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; text-align: center;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">{{ user[0] }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">{{ user[1] }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">{{ user[2] }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: center; vertical-align: middle;">
+                        <a href="{{ url_for('user.delete_user', user_id=user[0]) }}" 
+                        onclick="return confirm('Are you sure you want to delete {{ user[1] }}?');"
+                        style="background-color: #e74c3c;color: white;padding: 8px 16px; 
+                        border-radius: 6px;text-decoration: none;font-weight: bold;display: inline-block;transition: background-color 0.3s ease;">
+                        <i class="fas fa-trash"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No users found.</p>
+    {% endif %}
+</div>
+{% endblock %}

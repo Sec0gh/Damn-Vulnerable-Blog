@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerable Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="app-background">
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container">
+        <div class="d-flex">
+            {% if 'user_id' in session %}
+                <a href="{{ url_for('dashboard.home') }}" class="app-logo" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-bug"></i> <strong>VulnBlog</strong>
+                </a>
+                <a class="navbar-brand" href="{{ url_for('dashboard.home') }}"><i class="fas fa-home"></i> Home</a>
+                <a class="navbar-brand" href="{{ url_for('post.search') }}"><i class="fas fa-search"></i> Search</a>
+                <a class="navbar-brand" href="{{ url_for('misc.feedback') }}"><i class="fas fa-comment-dots"></i> Feedback</a>
+            {% else %}
+                <a href="{{ url_for('auth.login') }}" class="app-logo" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-bug"></i> <strong>VulnBlog</strong>
+                </a>
+            {% endif %}    
+        </div>
+        <div>
+            {% if 'user_id' in session %}
+                <a class="navbar-brand" href="{{ url_for('dashboard.profile', user_id=session['user_id']) }}"><i class="fas fa-user"></i> Profile</a>
+                <a class="navbar-brand" href="{{ url_for('auth.logout') }}"><i class="fas fa-sign-out-alt "></i> Logout</a>
+            {% else %}
+                <a class="navbar-brand" href="{{ url_for('auth.login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a class="navbar-brand" href="{{ url_for('auth.register') }}"><i class="fas fa-user-plus"></i> Register</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
