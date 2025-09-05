@@ -1,4 +1,4 @@
-Damn Vulnerable Blog (DVB)
+# Damn Vulnerable Blog (DVB)
 
 Damn Vulnerable Blog (DVB) is a Flask-based blog web application intentionally designed to be vulnerable.
 
@@ -6,7 +6,7 @@ It provides common blogging features such as user registration, login, posting, 
 
 ⚠️ **Disclaimer:**
 - This project is for **educational and testing purposes only**.
--  I don't take no responsibility for misuse.
+-  I don't take any responsibility for misuse.
 - Do **NOT** deploy it to production or expose it to the public internet.
 - It is meant strictly for local or isolated environments such as VMs or containers.
 
